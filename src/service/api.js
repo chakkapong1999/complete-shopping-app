@@ -1,4 +1,5 @@
 import axios from 'axios'
+import store from '../store'
 
 export default class ApiService {
   constructor ({ baseUrl = process.env.VUE_APP_API_URL }) {
@@ -11,9 +12,9 @@ export default class ApiService {
   }
 
   handleRequest (config) {
-    const token = ''
+    const token = store.state.user.user.token
     if (token) {
-      config.headers.Authorization = '$token'
+      config.headers.Authorization = token
     }
     return config
   }
