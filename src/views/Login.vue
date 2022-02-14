@@ -27,7 +27,9 @@
             <b-button type="submit" variant="success" class="mb-3"
               >Login</b-button
             >
-            <b-button class="mb-3"> Cotinue Shopping </b-button>
+            <b-button class="mb-3" @click="goShopping">
+              Cotinue Shopping
+            </b-button>
             <b-button variant="primary"> Create Account </b-button>
           </b-row>
         </b-form>
@@ -63,6 +65,9 @@ export default {
             this.$router.push({ name: 'Home' })
           }
         })
+    },
+    goShopping () {
+      this.$router.push({ name: 'Home' })
     }
   }
 }
