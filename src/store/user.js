@@ -12,6 +12,11 @@ const userStore = {
       state.user = payload
     }
   },
+  getters: {
+    checkIsAuth: state => {
+      return state.isAuth
+    }
+  },
   actions: {
     setIsAuth ({ commit }, payload) {
       commit('SET_ISAUTH', payload)

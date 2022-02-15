@@ -9,7 +9,7 @@ const productStore = {
         return value.product.productId === payload.product.productId
       })
       if (addItem) {
-        addItem.amount += payload.amount
+        addItem.amount++
         return
       }
       state.cart.push(payload)
@@ -23,6 +23,9 @@ const productStore = {
       } else {
         removeItem.amount = 0
       }
+    },
+    RESET_CART (state) {
+      state.cart = []
     }
   },
   getters: {
@@ -47,6 +50,9 @@ const productStore = {
     },
     removeItem ({ commit }, payload) {
       commit('REMOVE_ITEM', payload)
+    },
+    resetCart ({ commit }) {
+      commit('RESET_CART')
     }
   }
 }

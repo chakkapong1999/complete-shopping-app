@@ -56,7 +56,7 @@ export default {
     ...mapGetters('product', ['calculateTotalPrice'])
   },
   methods: {
-    ...mapActions('product', ['addItem', 'removeItem']),
+    ...mapActions('product', ['addItem', 'removeItem', 'resetCart']),
     handleAddItem (product) {
       this.addItem(product)
     },
@@ -74,7 +74,17 @@ export default {
           amount: element.amount
         })
       })
-      console.log(confirm)
+      this.$api.confirmCart(confirm).then((response) => {
+        if (response.data.success) {
+          alert(response.data.message)
+          this.resetCart()
+          this.$router.push({ name: 'Home' })
+        } else {
+          alert(
+            `${response.data.message} \nรหัสสินค้า ${response.data.productId}`
+          )
+        }
+      })
     }
   }
 }

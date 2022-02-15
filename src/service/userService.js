@@ -6,8 +6,10 @@ const client = new ApiService({
 
 export const createUser = (payload) => client.post('/create-user', payload)
 export const login = (payload) => client.post('/login', payload)
+export const changePassword = (payload) => client.post('/change-password', payload)
 
 export const userAPI = {
   createUser,
-  login
+  login,
+  changePassword
 }
