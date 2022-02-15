@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
 import Cart from '../views/Cart.vue'
+import Management from '../views/Management.vue'
 import Navigation from '@/components/Navigation'
 import store from '@/store'
 
@@ -38,6 +39,19 @@ const routes = [
             next({ name: 'Login' })
           } else {
             next()
+          }
+        }
+      },
+      {
+        path: '/management',
+        name: 'Management',
+        component: Management,
+        beforeEnter: (to, from, next) => {
+          if (store.getters['user/checkUser'] === 'admin') {
+            next()
+          } else {
+            alert('ไม่สามารถเข้าใช้งานได้')
+            next({ name: 'Home' })
           }
         }
       }

@@ -15,6 +15,9 @@ const userStore = {
   getters: {
     checkIsAuth: state => {
       return state.isAuth
+    },
+    checkUser: state => {
+      return state.user.username
     }
   },
   actions: {
