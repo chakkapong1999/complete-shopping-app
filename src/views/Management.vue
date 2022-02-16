@@ -154,6 +154,7 @@ export default {
               .then((response) => {
                 if (response.data.success) {
                   this.$alert(response.data.message, '', 'success')
+                  this.getProducts()
                 } else {
                   this.$alert(response.data.message, '', 'warning')
                 }

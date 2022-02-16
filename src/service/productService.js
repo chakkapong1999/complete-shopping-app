@@ -8,7 +8,7 @@ export const getProductsForPaging = (current, limit) => client.get(`/products/pa
 export const getProducts = () => client.get('/products')
 export const addProduct = (payload) => client.post('/products', payload)
 export const updateProdcut = (payload) => client.put('/products', payload)
-export const deleteProduct = (payload) => client.delete('/products/delete', payload)
+export const deleteProduct = (payload) => client.post('/products/delete', payload)
 
 export const confirmCart = (payload) => client.post('/inventory/confirm', payload)
 export const checkInstock = (id) => client.get(`/inventory/${id}`)
