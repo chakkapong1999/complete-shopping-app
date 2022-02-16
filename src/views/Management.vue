@@ -29,14 +29,28 @@
                   <button
                     type="button"
                     class="btn btn-warning"
-                    @click="showModal('edit', item)"
+                    @click="
+                      () => {
+                        showModal('edit');
+                        setEditProduct(item);
+                      }
+                    "
                   >
                     <b-icon-pencil-fill />
                   </button>
                   <button type="button" class="btn btn-danger">
                     <b-icon-trash />
                   </button>
-                  <button type="button" class="btn btn-secondary">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    @click="
+                      () => {
+                        showModal('addInventory');
+                        setInstock(item.productId);
+                      }
+                    "
+                  >
                     <b-icon-plus />
                   </button>
                 </div>
@@ -46,6 +60,34 @@
         </table>
       </div>
     </div>
+    <b-modal id="addInventory" title="ADD INVENTORY">
+      <b-form-group class="mb-2" :label="`Product ID : ${inventory.productId}`">
+        <b-form-input
+          id
+          type="number"
+          class="form-control"
+          placeholder="Product ID"
+          v-model="inStock.productId"
+          disabled
+        />
+      </b-form-group>
+      <b-form-group class="mb-2" :label="`In Stock : ${inventory.quantity}`">
+        <b-form-input
+          id
+          type="number"
+          class="form-control"
+          placeholder="Quantity"
+          v-model="inStock.quantity"
+        />
+      </b-form-group>
+
+      <template #modal-footer>
+        <b-button variant="success" size="xl" @click="handleAddInventory">
+          Add
+        </b-button>
+      </template>
+    </b-modal>
+
     <b-pagination
       align="center"
       v-model="currentPage"
@@ -70,6 +112,11 @@ export default {
   },
   data () {
     return {
+      inStock: {
+        productId: 0,
+        quantity: null
+      },
+      inventory: {},
       editProduct: {},
       fields: [],
       items: [],
@@ -79,6 +126,33 @@ export default {
     }
   },
   methods: {
+    handleAddInventory () {
+      console.log(this.inStock)
+      this.$api
+        .addInventory({
+          id: this.inStock.productId,
+          amount: this.inStock.quantity
+        })
+        .then((response) => {
+          if (response.data.success) {
+            alert(response.data.message)
+          } else {
+            alert(response.data.message)
+          }
+        })
+      this.closeModal('addInventory')
+      this.clearInStock()
+    },
+    clearInStock () {
+      this.inStock.productId = 0
+      this.inStock.quantity = null
+    },
+    setInstock (productId) {
+      this.$api.checkInstock(productId).then((response) => {
+        this.inventory = response.data
+        this.inStock.productId = this.inventory.productId
+      })
+    },
     handleOnsubmitEdit () {
       this.$api.updateProdcut(this.editProduct).then((response) => {
         if (response.data.success) {
@@ -101,8 +175,10 @@ export default {
       this.currentPage = page
       this.getProducts()
     },
-    showModal (name, data) {
+    setEditProduct (data) {
       this.editProduct = data
+    },
+    showModal (name) {
       this.$nextTick(() => {
         this.$bvModal.show(name)
       })

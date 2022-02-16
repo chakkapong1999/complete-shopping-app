@@ -9,6 +9,7 @@
             class="form-control"
             placeholder="Enter Name"
             v-model="data.name"
+            disabled
           />
         </b-form-group>
         <b-form-group class="mb-2" label="Price :">
