@@ -20,7 +20,9 @@
         <template #button-content>
           <b-icon-gear variant="light" />
         </template>
-        <b-dropdown-item>Management</b-dropdown-item>
+        <b-dropdown-item :to="{ name: 'Management' }"
+          >Management</b-dropdown-item
+        >
         <b-dropdown-item href="/"><b-icon-power /> Logout</b-dropdown-item>
       </b-dropdown>
     </b-navbar>
