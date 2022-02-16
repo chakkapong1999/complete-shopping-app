@@ -61,9 +61,9 @@ export default {
         })
         .then((response) => {
           if (response.data.success) {
-            alert(response.data.message)
+            this.$alert(response.data.message, '', 'success')
           } else {
-            alert(response.data.message)
+            this.$alert(response.data.message, '', 'warning')
           }
         })
       this.$emit('closeModal', 'addProduct')

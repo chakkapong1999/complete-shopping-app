@@ -64,7 +64,7 @@ export default {
             this.setUser(response.data)
             this.$router.push({ name: 'Home' })
           } else {
-            alert(response.data.message)
+            this.$alert(response.data.message, '', 'warning')
           }
         })
     },

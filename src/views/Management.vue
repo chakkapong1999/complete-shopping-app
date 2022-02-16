@@ -43,7 +43,11 @@
                   >
                     <b-icon-pencil-fill />
                   </button>
-                  <button type="button" class="btn btn-danger">
+                  <button
+                    type="button"
+                    class="btn btn-danger"
+                    @click="handleDelete(item)"
+                  >
                     <b-icon-trash />
                   </button>
                   <button
@@ -139,6 +143,25 @@ export default {
     }
   },
   methods: {
+    handleDelete (item) {
+      this.$confirm(`Do you want to delete ${item.name}?`, '', 'warning').then(
+        (result) => {
+          if (result) {
+            this.$api
+              .deleteProduct({
+                name: item.name
+              })
+              .then((response) => {
+                if (response.data.success) {
+                  this.$alert(response.data.message, '', 'success')
+                } else {
+                  this.$alert(response.data.message, '', 'warning')
+                }
+              })
+          }
+        }
+      )
+    },
     handleAddInventory () {
       this.$api
         .addInventory({
@@ -147,9 +170,9 @@ export default {
         })
         .then((response) => {
           if (response.data.success) {
-            alert(response.data.message)
+            this.$alert(response.data.message, '', 'success')
           } else {
-            alert(response.data.message)
+            this.$alert(response.data.message, '', 'warning')
           }
         })
       this.closeModal('addInventory')
@@ -168,9 +191,9 @@ export default {
     handleOnsubmitEdit () {
       this.$api.updateProdcut(this.editProduct).then((response) => {
         if (response.data.success) {
-          alert(response.data.message)
+          this.$alert(response.data.message, '', 'success')
         } else {
-          alert(response.data.message)
+          this.$alert(response.data.message, '', 'warning')
         }
         this.getProducts()
       })
