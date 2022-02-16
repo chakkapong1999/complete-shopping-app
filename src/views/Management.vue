@@ -6,7 +6,12 @@
           <h2>Product Management</h2>
         </div>
         <div class="mb-2" align="right">
-          <button type="button" class="btn btn-success" align="right">
+          <button
+            type="button"
+            class="btn btn-success"
+            align="right"
+            @click="showModal('addProduct')"
+          >
             ADD PRODUCT
           </button>
         </div>
@@ -82,7 +87,12 @@
       </b-form-group>
 
       <template #modal-footer>
-        <b-button variant="success" size="xl" @click="handleAddInventory">
+        <b-button
+          variant="success"
+          size="xl"
+          @click="handleAddInventory"
+          :disabled="inStock.quantity ? false : true"
+        >
           Add
         </b-button>
       </template>
@@ -100,15 +110,18 @@
       @closeModal="closeModal"
       @editProduct="handleOnsubmitEdit()"
     />
+    <ModalAddProduct @closeModal="closeModal" />
   </div>
 </template>
 
 <script>
 import ModalEdit from '@/components/ModalEditProduct.vue'
+import ModalAddProduct from '@/components/ModalAddProduct.vue'
 export default {
   name: 'Management',
   components: {
-    ModalEdit
+    ModalEdit,
+    ModalAddProduct
   },
   data () {
     return {
@@ -127,7 +140,6 @@ export default {
   },
   methods: {
     handleAddInventory () {
-      console.log(this.inStock)
       this.$api
         .addInventory({
           id: this.inStock.productId,

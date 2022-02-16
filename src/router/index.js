@@ -45,15 +45,15 @@ const routes = [
       {
         path: '/management',
         name: 'Management',
-        component: Management
-        // beforeEnter: (to, from, next) => {
-        //   if (store.getters['user/checkUser'] === 'admin') {
-        //     next()
-        //   } else {
-        //     alert('ไม่สามารถเข้าใช้งานได้')
-        //     next({ name: 'Home' })
-        //   }
-        // }
+        component: Management,
+        beforeEnter: (to, from, next) => {
+          if (store.getters['user/checkUser'] === 'admin') {
+            next()
+          } else {
+            alert('ไม่สามารถเข้าใช้งานได้')
+            next({ name: 'Home' })
+          }
+        }
       }
     ]
   }

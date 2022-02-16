@@ -63,6 +63,8 @@ export default {
             this.setIsAuth(true)
             this.setUser(response.data)
             this.$router.push({ name: 'Home' })
+          } else {
+            alert(response.data.message)
           }
         })
     },
