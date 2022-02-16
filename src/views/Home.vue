@@ -41,6 +41,8 @@ export default {
         .then((response) => {
           this.items = response.data.result
           this.rows = response.data.totalRow
+        }).catch(e => {
+          console.log(e.response.data)
         })
     },
     onPageChange (page) {

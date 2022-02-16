@@ -66,6 +66,9 @@ export default {
             this.$alert(response.data.message, '', 'warning')
           }
         })
+        .catch((e) => {
+          console.log(e.response.data)
+        })
       this.$emit('closeModal', 'addProduct')
       this.clearInput()
     },

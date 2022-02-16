@@ -159,6 +159,9 @@ export default {
                   this.$alert(response.data.message, '', 'warning')
                 }
               })
+              .catch((e) => {
+                console.log(e.response.data)
+              })
           }
         }
       )
@@ -176,6 +179,9 @@ export default {
             this.$alert(response.data.message, '', 'warning')
           }
         })
+        .catch((e) => {
+          console.log(e.response.data)
+        })
       this.closeModal('addInventory')
       this.clearInStock()
     },
@@ -190,14 +196,19 @@ export default {
       })
     },
     handleOnsubmitEdit () {
-      this.$api.updateProdcut(this.editProduct).then((response) => {
-        if (response.data.success) {
-          this.$alert(response.data.message, '', 'success')
-        } else {
-          this.$alert(response.data.message, '', 'warning')
-        }
-        this.getProducts()
-      })
+      this.$api
+        .updateProdcut(this.editProduct)
+        .then((response) => {
+          if (response.data.success) {
+            this.$alert(response.data.message, '', 'success')
+          } else {
+            this.$alert(response.data.message, '', 'warning')
+          }
+          this.getProducts()
+        })
+        .catch((e) => {
+          console.log(e.response.data)
+        })
     },
     getProducts () {
       this.$api
@@ -205,6 +216,8 @@ export default {
         .then((response) => {
           this.items = response.data.result
           this.rows = response.data.totalRow
+        }).catch(e => {
+          console.log(e.response.data)
         })
     },
     onPageChange (page) {

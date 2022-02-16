@@ -74,17 +74,22 @@ export default {
           amount: element.amount
         })
       })
-      this.$api.confirmCart(confirm).then((response) => {
-        if (response.data.success) {
-          alert(response.data.message)
-          this.resetCart()
-          this.$router.push({ name: 'Home' })
-        } else {
-          alert(
-            `${response.data.message} \nรหัสสินค้า ${response.data.productId}`
-          )
-        }
-      })
+      this.$api
+        .confirmCart(confirm)
+        .then((response) => {
+          if (response.data.success) {
+            alert(response.data.message)
+            this.resetCart()
+            this.$router.push({ name: 'Home' })
+          } else {
+            alert(
+              `${response.data.message} \nรหัสสินค้า ${response.data.productId}`
+            )
+          }
+        })
+        .catch((e) => {
+          console.log(e.response.data)
+        })
     }
   }
 }

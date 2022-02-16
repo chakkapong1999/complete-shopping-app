@@ -66,6 +66,8 @@ export default {
           } else {
             this.$alert(response.data.message, '', 'warning')
           }
+        }).catch(e => {
+          console.log(e.response.data)
         })
     },
     goShopping () {
