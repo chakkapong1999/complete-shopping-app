@@ -71,14 +71,6 @@
     </div>
     <b-modal id="addInventory" title="ADD INVENTORY">
       <b-form-group class="mb-2" :label="`Product ID : ${inventory.productId}`">
-        <b-form-input
-          id
-          type="number"
-          class="form-control"
-          placeholder="Product ID"
-          v-model="inStock.productId"
-          disabled
-        />
       </b-form-group>
       <b-form-group class="mb-2" :label="`In Stock : ${inventory.quantity}`">
         <b-form-input
