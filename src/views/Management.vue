@@ -56,7 +56,7 @@
                     @click="
                       () => {
                         showModal('addInventory');
-                        setInstock(item.productId);
+                        setInstock(item);
                       }
                     "
                   >
@@ -69,6 +69,7 @@
         </table>
       </div>
     </div>
+
     <b-modal id="addInventory" title="ADD INVENTORY">
       <b-form-group class="mb-2" :label="`Product ID : ${inventory.productId}`">
       </b-form-group>
@@ -125,7 +126,10 @@ export default {
         productId: 0,
         quantity: null
       },
-      inventory: {},
+      inventory: {
+        productId: 0,
+        quantity: null
+      },
       editProduct: {},
       fields: [],
       items: [],
@@ -181,11 +185,11 @@ export default {
       this.inStock.productId = 0
       this.inStock.quantity = null
     },
-    setInstock (productId) {
-      this.$api.checkInstock(productId).then((response) => {
-        this.inventory = response.data
-        this.inStock.productId = this.inventory.productId
-      })
+    setInstock (item) {
+      console.log('item: ', item)
+      this.inStock.productId = item.productId
+      this.inventory.productId = item.productId
+      this.inventory.quantity = item.quantity
     },
     handleOnsubmitEdit () {
       this.$api

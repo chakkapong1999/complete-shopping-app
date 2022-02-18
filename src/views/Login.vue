@@ -30,18 +30,23 @@
             <b-button class="mb-3" @click="goShopping">
               Cotinue Shopping
             </b-button>
-            <b-button variant="primary"> Create Account </b-button>
+            <b-button variant="primary" @click="modalCreateAcc('create-acc')"> Create Account </b-button>
           </b-row>
         </b-form>
       </div>
     </b-row>
+    <ModalCreateAccount @closeModal="closeModal" />
   </div>
 </template>
 
 <script>
 import { mapActions } from 'vuex'
+import ModalCreateAccount from '@/components/ModalCreateAccount.vue'
 export default {
   name: 'Login',
+  components: {
+    ModalCreateAccount
+  },
   data () {
     return {
       formLogin: {
@@ -72,6 +77,12 @@ export default {
     },
     goShopping () {
       this.$router.push({ name: 'Home' })
+    },
+    modalCreateAcc (name) {
+      this.$bvModal.show(name)
+    },
+    closeModal (name) {
+      this.$bvModal.hide(name)
     }
   }
 }
