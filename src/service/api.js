@@ -13,8 +13,12 @@ export default class ApiService {
 
   handleRequest (config) {
     const token = store.state.user.user.token
+    const username = store.state.user.user.username
     if (token) {
       config.headers.Authorization = token
+    }
+    if (username) {
+      config.headers.User = username
     }
     return config
   }

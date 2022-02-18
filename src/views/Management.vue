@@ -167,6 +167,8 @@ export default {
         .then((response) => {
           if (response.data.success) {
             this.$alert(response.data.message, '', 'success')
+            this.closeModal('addInventory')
+            this.clearInStock()
           } else {
             this.$alert(response.data.message, '', 'warning')
           }
@@ -174,8 +176,6 @@ export default {
         .catch((e) => {
           console.log(e.response.data)
         })
-      this.closeModal('addInventory')
-      this.clearInStock()
     },
     clearInStock () {
       this.inStock.productId = 0
@@ -208,7 +208,8 @@ export default {
         .then((response) => {
           this.items = response.data.result
           this.rows = response.data.totalRow
-        }).catch(e => {
+        })
+        .catch((e) => {
           console.log(e.response.data)
         })
     },
