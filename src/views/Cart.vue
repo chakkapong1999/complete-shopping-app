@@ -78,12 +78,15 @@ export default {
         .confirmCart(confirm)
         .then((response) => {
           if (response.data.success) {
-            alert(response.data.message)
-            this.resetCart()
-            this.$router.push({ name: 'Home' })
+            this.$alert(response.data.message, '', 'success').then(() => {
+              this.resetCart()
+              this.$router.push({ name: 'Home' })
+            })
           } else {
-            alert(
-              `${response.data.message} \nรหัสสินค้า ${response.data.productId}`
+            this.$alert(
+              `${response.data.message} รหัสสินค้า ${response.data.productId}`,
+              '',
+              'warning'
             )
           }
         })
