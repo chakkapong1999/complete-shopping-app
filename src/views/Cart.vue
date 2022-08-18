@@ -83,8 +83,7 @@ export default {
               this.$router.push({ name: 'Home' })
             })
           } else {
-            this.$alert(
-              `${response.data.message} รหัสสินค้า ${response.data.productId}`,
+            this.$alert(response.data.message,
               '',
               'warning'
             )

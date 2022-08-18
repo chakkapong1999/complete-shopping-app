@@ -70,8 +70,7 @@
       </div>
     </div>
     <b-modal id="addInventory" title="ADD INVENTORY">
-      <b-form-group class="mb-2" :label="`Product ID : ${inventory.productId}`">
-      </b-form-group>
+      <b-form-group class="mb-2" :label="`Product ID : ${inventory.productId}`"/>
       <b-form-group class="mb-2" :label="`In Stock : ${inventory.quantity}`">
         <b-form-input
           id
